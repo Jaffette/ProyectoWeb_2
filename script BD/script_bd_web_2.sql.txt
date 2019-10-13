@@ -1,0 +1,85 @@
+--CREATE DATABASE Web2
+
+CREATE TABLE votaciones(
+	id_votacion SERIAL NOT NULL PRIMARY KEY,
+	votos_favor INT NOT NULL,
+	votos_contra INT NOT NULL,
+	votos_blanco INT NOT NULL
+	
+);DROP TABLE actas
+CREATE TABLE actas(
+	id_acta SERIAL NOT NULL PRIMARY KEY,
+	datos JSON NOT NULL
+	
+);
+
+
+
+CREATE OR REPLACE FUNCTION obtenerActas
+(
+    IN v_actaid INT,
+    OUT v_idacta INT,
+    OUT v_datos JSON
+	
+) RETURNS SETOF RECORD AS
+$BODY$
+BEGIN
+		RETURN query SELECT id_acta, datos  FROM actas where actas.id_acta = v_actaid;
+
+END;
+$BODY$
+LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION guardarActa(v_datos JSON)RETURNS void AS 
+$$
+BEGIN
+		INSERT INTO actas(datos)
+		VALUES(v_datos);
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION obtenerVotacion
+(
+    IN v_votacionid INT,
+    OUT v_idvotacion INT,
+    OUT v_favor INT,
+	OUT v_contra INT,
+	OUT v_blanco INT
+	
+) RETURNS SETOF RECORD AS
+$BODY$
+BEGIN
+		RETURN query SELECT id_votacion,votos_favor, votos_contra, votos_blanco  FROM votaciones where votaciones.id_votacion = v_votacionid;
+
+END;
+$BODY$
+LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION guardarVotaciones(v_favor INT,v_contra INT, v_blanco INT)RETURNS void AS 
+$$
+BEGIN
+		INSERT INTO votaciones(votos_favor, votos_contra, votos_blanco)
+		VALUES(v_favor,v_contra, v_blanco);
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+
+
+select * from actas
+select * from votaciones
+SELECT guardarVotaciones(1,2,1)
+SELECT guardarVotaciones(4,0,0)
+SELECT guardarVotaciones(3,1,0)
+SELECT guardarVotaciones(0,3,1)
+SELECT guardarActa('{ "Descripcion": "Papeleo", "considerandos": "Revisar actas pasadas","acuerdos":[{"descripcion":"Aprobar ley 101","idVotacion":1},{"descripcion":"Eliminar ley 27","idVotacion":2}]}'
+)
+SELECT guardarActa('{ "Descripcion": "Papeleo numero 2", "considerandos": "Actualizar lugares de reunion","acuerdos":[{"descripcion":"Aprobar el viaje al exterior","idVotacion":3},{"descripcion":"Eliminar ley 28","idVotacion":4}]}'
+)
+SELECT obtenerActas(1)
+SELECT obtenerActas(2)
+SELECT obtenerVotacion(1)
+SELECT obtenerVotacion(2)
+SELECT obtenerVotacion(3)
+SELECT obtenerVotacion(4)
