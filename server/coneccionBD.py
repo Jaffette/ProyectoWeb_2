@@ -3,7 +3,7 @@ import json
 from psycopg2.extras import Json
 
 def establecerConexion():
-    conexion = psycopg2.connect("dbname=Web2 user=postgres password=12345")
+    conexion = psycopg2.connect("dbname=web2 user=postgres password=12345")
     return conexion
 
 
@@ -39,7 +39,7 @@ def getVotacion(id):
         cur.execute( 'SELECT * from obtenerVotacion('+str(id)+')' )
         votacion = ''
         for datos in cur.fetchall() :
-        votacion = datos
+            votacion = datos
         # Cerramos la conexión
         response = {"data":votacion}
         conexion.close()
@@ -63,5 +63,5 @@ def insertActa(acta):
         conexion.close()
         return 'ok'
     except:
-        return return 'No se ha podido realizar la insercion'
+        return 'No se ha podido realizar la insercion'
     
