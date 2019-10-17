@@ -1,5 +1,7 @@
 lista_acuerdos = [];
 var jsonToSend = {};
+var ls = false;
+var ind_ls = 0;
 
 /**
  * @function agregar_acuerdo funcion agregar los acuerdos en la lista de jsons de los mismos
@@ -16,7 +18,20 @@ function agregar_acuerdo()
             "descripcion": txt_acuerdo_plain,
             "idVotacion": id_votacion
         }
-        lista_acuerdos.push(json);
+        if(!ls){
+            lista_acuerdos.push(json);
+        }
+        else{
+            if(ind_ls == 0 && ind_ls == lista_acuerdos.lenght-1){
+                lista_acuerdos.push(json);
+                
+            }
+            else{
+                lista_acuerdos.splice(ind_ls,1,json);
+            }
+            console.log("Después de agregar o mod acuerdo",lista_acuerdos);
+            ind_ls ++;
+        }
         limpiar_textos_acuerdo()
     }
 }
@@ -35,16 +50,20 @@ function limpiar_textos_acuerdo(){
  */
 
 function agregar_acta(){
+    get_acta_info();
+    guardar_acta_bd(jsonToSend);
+    limpiar_textos_acta();
+}
+
+function get_acta_info(){
     var desc_actas = document.getElementById("desc_actas").value;
     var txt_considerandos = CKEDITOR.instances.ckeditor1.getData();
     var txt_considerandos_plain = txt_considerandos.replace(/<\/?[^>]+(>|$)/g, "");
     jsonToSend = {
         "Descripcion":desc_actas,
-        "considerandos":txt_considerandos_plain,
-        "acuerdos":lista_acuerdos
+        "Considerandos":txt_considerandos_plain,
+        "Acuerdos":lista_acuerdos
     }
-    //guardar_acta_bd(jsonToSend);
-    limpiar_textos_acta();
 }
 
 /**
@@ -75,15 +94,24 @@ function guardar_acta_bd(json){
 
 function guardar_acta_ls(){
     window.localStorage
-    agregar_acta();
-    console.log(jsonToSend);
+    get_acta_info();
+    console.log("antes de guardar en el local storage",jsonToSend);
     localStorage.setItem('acta',JSON.stringify(jsonToSend));
 }
 
 function leer_acta_ls(){
     var json_leido = JSON.parse(localStorage.getItem('acta'));
-    console.log(json_leido["Descripcion"])
-    document.getElementById("desc_actas").value = json_leido["Descripcion"];
+    if(json_leido != null){
+        console.log(json_leido["Descripcion"])
+        document.getElementById("desc_actas").value = json_leido["Descripcion"];
+        CKEDITOR.instances.ckeditor1.setData(json_leido["Considerandos"]);
+        document.getElementById("idVotacion").value = json_leido["Acuerdos"][ind_ls]["idVotacion"];
+        CKEDITOR.instances.ckeditor2.setData(json_leido["Acuerdos"][ind_ls]["descripcion"]);
+        document.getElementById("guardar_acuerdo").style.visibility = "visible";
+        lista_acuerdos = json_leido["Acuerdos"];
+        console.log(lista_acuerdos);
+        ls = true;
+    }
     
     //localStorage.clear();
     console.log(json_leido);

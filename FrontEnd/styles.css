@@ -1,3 +1,6 @@
 #tableContent{
     border: solid salmon 2px;
 }
+#guardar_acuerdo{
+    visibility: hidden;
+}
