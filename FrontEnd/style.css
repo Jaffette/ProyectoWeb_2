@@ -1,7 +1,45 @@
 #vistaPrincipal
 {
+   text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-content: center;
-    padding-left: 40%;
-    padding-right: 40%;
-    padding-top: 10%;
+    padding: 3%;    
+   
+}
+
+h1
+{
+    color: grey;
+    font-size: 4rem;
+    font-family:cursive;
+   
+}
+
+button
+{
+    padding: 2%;
+    margin: 2%;
+    background-color:teal;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 15px;
+    font-family: cursive;
+}
+
+button:hover
+{
+    color: black;
+    background-color: lightseagreen;
+}
+
+#contenedorBotones
+{
+    display: flex;
+    flex-direction: column;
+    padding: 25%;
+    padding-top: 3%;
+    padding-bottom: 0;
 }
