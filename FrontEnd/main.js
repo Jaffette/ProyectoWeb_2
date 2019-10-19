@@ -148,12 +148,13 @@ function leer_acta_ls(){
             btn_modificar.setAttribute("onClick","btn_editar_acuerdo(this.getAttribute('id'))");
             btn_modificar.setAttribute("data-toggle","modal");
             btn_modificar.setAttribute("data-target","#myModal");
+            btn_modificar.setAttribute("class","img_edit");
             console.log("En la pos acuerdo",acuerdo)
             var desc_txt = document.createTextNode(json_leido["Acuerdos"][acuerdo].descripcion);
             td_desc.appendChild(desc_txt);
-            btn_modificar.appendChild(td_but);
+            td_but.appendChild(btn_modificar);
             tr_desc.appendChild(td_desc);
-            tr_desc.appendChild(btn_modificar);
+            tr_desc.appendChild(td_but);
             tabla_acuerdos.appendChild(tr_desc);
             //var td_desc = document.getElementById("lista_acuerdos");
         }

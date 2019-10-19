@@ -3,7 +3,7 @@ import json
 from psycopg2.extras import Json
 
 def establecerConexion():
-    conexion = psycopg2.connect("dbname=web2 user=postgres password=12345")
+    conexion = psycopg2.connect("dbname=web2 user=postgres password=1234")
     return conexion
 
 

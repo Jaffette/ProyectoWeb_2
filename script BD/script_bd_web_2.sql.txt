@@ -69,17 +69,17 @@ $$ LANGUAGE plpgsql;
 
 select * from actas
 select * from votaciones
-SELECT guardarVotaciones(1,2,1)
-SELECT guardarVotaciones(4,0,0)
-SELECT guardarVotaciones(3,1,0)
-SELECT guardarVotaciones(0,3,1)
+SELECT guardarVotaciones(1,2,1);
+SELECT guardarVotaciones(4,0,0);
+SELECT guardarVotaciones(3,1,0);
+SELECT guardarVotaciones(0,3,1);
 SELECT guardarActa('{ "Descripcion": "Papeleo", "considerandos": "Revisar actas pasadas","acuerdos":[{"descripcion":"Aprobar ley 101","idVotacion":1},{"descripcion":"Eliminar ley 27","idVotacion":2}]}'
-)
+);
 SELECT guardarActa('{ "Descripcion": "Papeleo numero 2", "considerandos": "Actualizar lugares de reunion","acuerdos":[{"descripcion":"Aprobar el viaje al exterior","idVotacion":3},{"descripcion":"Eliminar ley 28","idVotacion":4}]}'
-)
-SELECT obtenerActas(1)
-SELECT obtenerActas(2)
-SELECT obtenerVotacion(1)
-SELECT obtenerVotacion(2)
-SELECT obtenerVotacion(3)
-SELECT obtenerVotacion(4)
+);
+SELECT obtenerActas(1);
+SELECT obtenerActas(2);
+SELECT obtenerVotacion(1);
+SELECT obtenerVotacion(2);
+SELECT obtenerVotacion(3);
+SELECT obtenerVotacion(4);
