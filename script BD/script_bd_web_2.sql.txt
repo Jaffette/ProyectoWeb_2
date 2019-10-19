@@ -12,9 +12,6 @@ CREATE TABLE actas(
 	datos JSON NOT NULL
 	
 );
-
-
-
 CREATE OR REPLACE FUNCTION obtenerActas
 (
     IN v_actaid INT,
@@ -61,11 +58,6 @@ BEGIN
 		VALUES(v_favor,v_contra, v_blanco);
 END;
 $$ LANGUAGE plpgsql;
-
-
-
-
-
 
 select * from actas
 select * from votaciones

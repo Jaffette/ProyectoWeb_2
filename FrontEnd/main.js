@@ -1,3 +1,4 @@
+
 lista_acuerdos = [];
 var jsonToSend = {};
 
@@ -7,7 +8,6 @@ var jsonToSend = {};
  */
 function agregar_acuerdo()
 {
-    console.log("Hello")
     if(document.getElementById("idVotacion") != null && document.getElementById("ckeditor2") != null){
         var id_votacion = document.getElementById("idVotacion").value;
         var txt_acuerdo = CKEDITOR.instances.ckeditor2.getData();
@@ -88,3 +88,56 @@ function leer_acta_ls(){
     //localStorage.clear();
     console.log(json_leido);
 }
+
+function limpiar(){
+    document.getElementById("tableV").style.display='none';
+}
+
+function visual(){
+    var listaV=null;
+    var listaV=["1","Reunion del 27/08/19","Viaje al exterior, Aprobacion de ley 27","Solicitar mas becas"];
+    id= document.getElementById('idinput').value;
+
+
+    var req=new XMLHttpRequest;
+    req.onreadystatechange= function ()
+    {
+        console.log(req.status,req.readyState);
+        if (req.status==200 && req.readyState==4)
+        {
+            console.log("Response",req.responseText);
+        }
+    }
+    
+    req.open("GET"," http://127.0.0.1:5000/obtenerActa",true);
+    req.setRequestHeader("Content-type", "application/json");
+    req.send(1);
+
+
+    var req=new XMLHttpRequest;
+    req.onreadystatechange= function ()
+    {
+        console.log(req.status,req.readyState);
+        if (req.status==200 && req.readyState==4)
+        {
+            console.log("Response",req.responseText);
+        }
+    }
+    
+    req.open("GET"," http://127.0.0.1:5000/obtenerActa/1",true);
+    
+
+
+    if(listaV!=null){
+        document.getElementById("tableV").style.display='block';
+        document.getElementById('c1').innerHTML = listaV[0];
+        document.getElementById('c2').innerHTML = listaV[1];
+        document.getElementById('c3').innerHTML = listaV[2];
+        document.getElementById('c4').innerHTML = listaV[3];
+        document.getElementById('tableV').className='cltable2';
+    }else{
+        alert("No hay ningun acta con el id:"+id);
+     
+    }
+    
+  }

@@ -1,3 +1,46 @@
 #tableContent{
     border: solid salmon 2px;
 }
+
+table, th, td, caption {
+    border: 1px solid black;
+}
+.cltable{
+    padding-left:40%;
+}
+.cltable2{
+    padding-left:30%;
+}
+input[type=number] {
+    width: 100px;
+    box-sizing: border-box;
+}
+.encabezado{
+    font-weight: bold;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+.allActas{
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+caption{
+ font-weight: bold;   
+}
+@media (max-width: 900px) and (min-width:660px) {
+    
+    .cltable{
+        padding-left:10%;
+    }
+    
+}
+@media (max-width: 660px) {
+    
+    .cltable{
+        padding-left:1%;
+    }
+    
+}
