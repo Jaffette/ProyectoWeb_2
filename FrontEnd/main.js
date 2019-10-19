@@ -1,6 +1,7 @@
 lista_acuerdos = [];
 var jsonToSend = {};
 var ls = false;
+var mod_ls = false;
 var ind_ls = 0;
 
 /**
@@ -18,8 +19,19 @@ function agregar_acuerdo()
             "descripcion": txt_acuerdo_plain,
             "idVotacion": id_votacion
         }
+        if(mod_ls){
+            console.log("Entré a mod_ls");
+            
+        }
         if(!ls){
             lista_acuerdos.push(json);
+            var tab_lista_acuerdos = document.getElementById("table_acuerdos_body");
+            var tr_acuerdo = document.createElement("tr");
+            var td_acuerdo = document.createElement("td");
+            var txt_td_acuerdo = document.createTextNode(txt_acuerdo_plain);
+            td_acuerdo.appendChild(txt_td_acuerdo);
+            tr_acuerdo.appendChild(td_acuerdo);
+            tab_lista_acuerdos.appendChild(tr_acuerdo);
         }
         else{
             if(ind_ls == 0 && ind_ls == lista_acuerdos.lenght-1){
@@ -32,6 +44,7 @@ function agregar_acuerdo()
             console.log("Después de agregar o mod acuerdo",lista_acuerdos);
             ind_ls ++;
         }
+        
         limpiar_textos_acuerdo()
     }
 }
@@ -98,20 +111,56 @@ function guardar_acta_ls(){
     console.log("antes de guardar en el local storage",jsonToSend);
     localStorage.setItem('acta',JSON.stringify(jsonToSend));
 }
+function btn_editar_acuerdo(id){
+    console.log("Acuerdos",lista_acuerdos)
+    document.getElementById("idVotacion").value = lista_acuerdos[0]["idVotacion"];
+    CKEDITOR.instances.ckeditor2.setData(lista_acuerdos[0]["descripcion"])
+    document.getElementById("enviar_acuerdo").childNodes[0].nodeValue = "Modificar acuerdo";
+    //document.getElementById()
+    console.log(id);
+}
+function change_name(){
+    document.getElementById("enviar_acuerdo").childNodes[0].nodeValue = "Agregar acuerdo";
+}
 
 function leer_acta_ls(){
     var json_leido = JSON.parse(localStorage.getItem('acta'));
     if(json_leido != null){
-        console.log(json_leido["Descripcion"])
+        /*console.log(json_leido["Descripcion"])
         document.getElementById("desc_actas").value = json_leido["Descripcion"];
         CKEDITOR.instances.ckeditor1.setData(json_leido["Considerandos"]);
         document.getElementById("idVotacion").value = json_leido["Acuerdos"][ind_ls]["idVotacion"];
         CKEDITOR.instances.ckeditor2.setData(json_leido["Acuerdos"][ind_ls]["descripcion"]);
         document.getElementById("guardar_acuerdo").style.visibility = "visible";
         lista_acuerdos = json_leido["Acuerdos"];
-        console.log(lista_acuerdos);
+        console.log(lista_acuerdos);*/
+        console.log("lenght acuerdos",json_leido["Acuerdos"].length)
+        //console.log("en la lista",)
+        lista_acuerdos = json_leido["Acuerdos"];
+        for(var acuerdo in json_leido["Acuerdos"]){
+            var tabla_acuerdos = document.getElementById("lista_acuerdos");
+            var tr_desc = document.createElement("tr");
+            var td_desc  = document.createElement("td");
+            var td_but  = document.createElement("td");
+            var btn_modificar = document.createElement("button");
+            var id_btn =  acuerdo.toString(10);
+            btn_modificar.setAttribute("id", id_btn);
+            btn_modificar.setAttribute("onClick","btn_editar_acuerdo(this.getAttribute('id'))");
+            btn_modificar.setAttribute("data-toggle","modal");
+            btn_modificar.setAttribute("data-target","#myModal");
+            console.log("En la pos acuerdo",acuerdo)
+            var desc_txt = document.createTextNode(json_leido["Acuerdos"][acuerdo].descripcion);
+            td_desc.appendChild(desc_txt);
+            btn_modificar.appendChild(td_but);
+            tr_desc.appendChild(td_desc);
+            tr_desc.appendChild(btn_modificar);
+            tabla_acuerdos.appendChild(tr_desc);
+            //var td_desc = document.getElementById("lista_acuerdos");
+        }
         ls = true;
     }
+
+    
     
     //localStorage.clear();
     console.log(json_leido);

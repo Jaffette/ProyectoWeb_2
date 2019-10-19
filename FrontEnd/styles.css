@@ -1,6 +1,22 @@
-#tableContent{
+#container_acuerdo{
     border: solid salmon 2px;
 }
 #guardar_acuerdo{
-    visibility: hidden;
+    visibility: visible;
+    color: black;
+    font-weight: bold;
+}
+#editor_modal{
+    padding-top: 3%;
+}
+#myModal{
+    
+    position: fixed;
+}
+#row_acuerdos{
+    padding-top: 2%;
+}
+#btn_agregar_acuerdo{
+    display: block;
+    margin: auto;
 }
