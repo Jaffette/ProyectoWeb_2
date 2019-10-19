@@ -116,7 +116,7 @@ function visual(){
              
             console.log(req);
         };
-        req.send(null);
+        req.send();
        
         
     }
