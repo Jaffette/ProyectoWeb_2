@@ -91,12 +91,17 @@ function leer_acta_ls(){
 
 function limpiar(){
     document.getElementById("tableV").style.display='none';
+    document.getElementById("allActas").style.display='none';
 }
 
 function visual(){
     var listaV=null;
     var listaV=["1","Reunion del 27/08/19","Viaje al exterior, Aprobacion de ley 27","Solicitar mas becas"];
-    id= document.getElementById('idinput').value;
+    var id= document.getElementById('idinput').value;
+
+
+    
+    
 
 
     var req=new XMLHttpRequest;
@@ -105,31 +110,16 @@ function visual(){
         console.log(req.status,req.readyState);
         if (req.status==200 && req.readyState==4)
         {
-            console.log("Response",req.responseText);
+            console.log("Response",req.response);
         }
     }
     
-    req.open("GET"," http://127.0.0.1:5000/obtenerActa",true);
-    req.setRequestHeader("Content-type", "application/json");
-    req.send(1);
-
-
-    var req=new XMLHttpRequest;
-    req.onreadystatechange= function ()
-    {
-        console.log(req.status,req.readyState);
-        if (req.status==200 && req.readyState==4)
-        {
-            console.log("Response",req.responseText);
-        }
-    }
-    
-    req.open("GET"," http://127.0.0.1:5000/obtenerActa/1",true);
-    
-
+    req.open("GET"," http://127.0.0.1:5000/obtenerActa/"+id,true);
+    req.send("");
 
     if(listaV!=null){
         document.getElementById("tableV").style.display='block';
+        document.getElementById("allActas").style.display='block';
         document.getElementById('c1').innerHTML = listaV[0];
         document.getElementById('c2').innerHTML = listaV[1];
         document.getElementById('c3').innerHTML = listaV[2];

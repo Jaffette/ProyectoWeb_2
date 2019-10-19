@@ -6,6 +6,7 @@ table, th, td, caption {
     border: 1px solid black;
 }
 .cltable{
+    display: none;
     padding-left:40%;
 }
 .cltable2{
@@ -21,8 +22,10 @@ input[type=number] {
     padding-bottom: 20px;
     text-align: center;
 }
-.allActas{
+#allActas{
+    display: none;
     font-weight: bold;
+    padding-right;: 50%;
     padding-top: 5px;
     padding-bottom: 5px;
     text-align: center;
