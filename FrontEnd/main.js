@@ -76,7 +76,6 @@ function get_acta_info(){
         "Acuerdos":lista_acuerdos
     }
 }
-
 /**
  * @function limpiar_textos_acuerdo funcion limpiar el editor y el campo del id de la votación después de agregar
  * @param {}
