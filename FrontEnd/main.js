@@ -102,35 +102,40 @@ function visual(){
     var req=new XMLHttpRequest;
     if(id>0){
         
-        req.onreadystatechange= function (callback)
+        req.onreadystatechange= function ()
         {
             console.log(req.status,req.readyState);
             if (req.status==200 && req.readyState==4)
             {
-                console.log("Response",req);
+                var json = eval("("+req.responseText+")"); 
+                for (var body in json) {
+                    var info = json[body][0].info;
+                    var acuerdos = ""
+                    for(var i in info.acuerdos){
+                        console.log(i);
+                        if(i==0){
+                            acuerdos = acuerdos+info.acuerdos[i].descripcion;
+                        }else{
+                            acuerdos = acuerdos+", "+info.acuerdos[i].descripcion;
+                        }
+                    }
+                    document.getElementById('c1').innerHTML = json[body][0].id;
+                    document.getElementById('c2').innerHTML = info.Descripcion;
+                    document.getElementById('c3').innerHTML = acuerdos;
+                    document.getElementById('c4').innerHTML = info.considerandos;
+                }
+                document.getElementById("tableV").style.display='block';
+                document.getElementById("allActas").style.display='block';
+                document.getElementById('tableV').className='cltable2';
             }
         }
-        
         req.open("GET"," http://127.0.0.1:5000/obtenerActa/"+id,true);
-        req.onload = function (){
-             
-            console.log(req);
-        };
         req.send();
        
         
     }
-    if(listaV!=null){
-        document.getElementById("tableV").style.display='block';
-        document.getElementById("allActas").style.display='block';
-        document.getElementById('c1').innerHTML = listaV[0];
-        document.getElementById('c2').innerHTML = listaV[1];
-        document.getElementById('c3').innerHTML = listaV[2];
-        document.getElementById('c4').innerHTML = listaV[3];
-        document.getElementById('tableV').className='cltable2';
-    }else{
-        alert("No hay ningun acta con el id:"+id);
-     
-    }
+    
+        
+    
     
   }
