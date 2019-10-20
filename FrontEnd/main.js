@@ -60,7 +60,8 @@ function limpiar_textos_acuerdo(){
 
 function agregar_acta(){
     get_acta_info();
-    guardar_acta_bd(jsonToSend);
+    //guardar_acta_bd(jsonToSend);
+    ajax.guardar_acta_bd(jsonToSend);
     ls = false;
     limpiar_textos_acta();
 }
@@ -86,7 +87,7 @@ function limpiar_textos_acta(){
     CKEDITOR.instances.ckeditor1.setData("");
 }
 
-function guardar_acta_bd(json){
+/*function guardar_acta_bd(json){
     var req=new XMLHttpRequest;
     req.onreadystatechange= function ()
     {
@@ -100,7 +101,7 @@ function guardar_acta_bd(json){
     req.open("POST"," http://127.0.0.1:5000/insertarActa",true);
     req.setRequestHeader("Content-type", "application/json");
     req.send(JSON.stringify(json));
-}
+}*/
 
 function guardar_acta_ls(){
     window.localStorage
@@ -174,8 +175,6 @@ function limpiar(){
     
   
 function visual(){
-    var listaV=null;
-    var listaV=["1","Reunion del 27/08/19","Viaje al exterior, Aprobacion de ley 27","Solicitar mas becas"];
     var id= document.getElementById('idinput').value;
     var req=new XMLHttpRequest;
     if(id>0){

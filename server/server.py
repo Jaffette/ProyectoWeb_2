@@ -25,7 +25,5 @@ def insertarActa():
     content = request.get_json(silent=True)
     return (insertActa(content))
 
-
-
 if __name__ == "__main__":
     app.run()
