@@ -1,4 +1,3 @@
-
 lista_acuerdos = [];
 var jsonToSend = {};
 var ls = false;
@@ -19,7 +18,8 @@ function agregar_acuerdo()
             "descripcion": txt_acuerdo_plain,
             "idVotacion": id_votacion
         }
-        if(!ls){
+
+        if(!ls || mod_ls){
             lista_acuerdos.push(json);
             var tab_lista_acuerdos = document.getElementById("table_acuerdos_body");
             var tr_acuerdo = document.createElement("tr");
@@ -30,18 +30,13 @@ function agregar_acuerdo()
             tab_lista_acuerdos.appendChild(tr_acuerdo);
         }
         else{
-            if(ind_ls == 0 && ind_ls == lista_acuerdos.lenght-1){
-                lista_acuerdos.push(json);
-                
-            }
-            else{
+                console.log("estoy aquí", document.getElementById(ind_ls.toString(10)).innerText);
+                document.getElementById(ind_ls.toString(10)).innerText = txt_acuerdo_plain;
                 lista_acuerdos.splice(ind_ls,1,json);
             }
-            console.log("Después de agregar o mod acuerdo",lista_acuerdos);
-            ind_ls ++;
-        }
         
         limpiar_textos_acuerdo()
+        mod_ls = false;
     }
 }
 /**
@@ -77,10 +72,34 @@ function agregar_acta(){
         document.getElementById("container_principal").appendChild(alert_bueno);
         //document.body.appendChild(alert_bueno);
     }
+    //ajax.guardar_acta_bd(jsonToSend);
+    limpiar_todo();
+}
+/**
+ * @function limpiar_todo función para llamar todos los métodos de limpieza de los campos de texto
+ * @param {}  
+ */
+function limpiar_todo(){
+    limpiar_tabla_acuerdos();
     ls = false;
     limpiar_textos_acta();
+    lista_acuerdos = [];
+    jsonToSend = {};
 }
-
+/**
+ * @function limpiar_tabla_acuerdos función para limpiar la tabla de acuerdos al enviarlo o guardarlo
+ * @param {}  
+ */
+function limpiar_tabla_acuerdos(){
+    var table = document.getElementById('lista_acuerdos');
+    while(table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+}
+/**
+ * @function get_acta_info función para obtener de los campos de texto la información general del acta
+ * @param {}  
+ */
 function get_acta_info(){
     var desc_actas = document.getElementById("desc_actas").value;
     var txt_considerandos = CKEDITOR.instances.ckeditor1.getData();
@@ -95,59 +114,50 @@ function get_acta_info(){
  * @function limpiar_textos_acuerdo funcion limpiar el editor y el campo del id de la votación después de agregar
  * @param {}
  */
-
 function limpiar_textos_acta(){
     document.getElementById("desc_actas").value = "";
     CKEDITOR.instances.ckeditor1.setData("");
 }
-
-/*function guardar_acta_bd(json){
-    var req=new XMLHttpRequest;
-    req.onreadystatechange= function ()
-    {
-        console.log(req.status,req.readyState);
-        if (req.status==200 && req.readyState==4)
-        {
-            console.log("Response",req.responseText);
-        }
-    }
-    console.log(json);
-    req.open("POST"," http://127.0.0.1:5000/insertarActa",true);
-    req.setRequestHeader("Content-type", "application/json");
-    req.send(JSON.stringify(json));
-}*/
-
+/**
+ * @function guardar_acta_ls funcion para almacenar el acta en el local storage
+ * @param {}  
+ */
 function guardar_acta_ls(){
     window.localStorage
     get_acta_info();
-    console.log("antes de guardar en el local storage",jsonToSend);
     localStorage.setItem('acta',JSON.stringify(jsonToSend));
+    limpiar_todo();
 }
+/**
+ * @function btn_editar_acuerdo Funcion para mostrar en el modal el acuerdo seleccionado
+ * @param {id}  es el id de cada acuerdo que sería igual a su posición en la lista
+ */
 function btn_editar_acuerdo(id){
     console.log("Acuerdos",lista_acuerdos)
-    document.getElementById("idVotacion").value = lista_acuerdos[0]["idVotacion"];
-    CKEDITOR.instances.ckeditor2.setData(lista_acuerdos[0]["descripcion"])
+    document.getElementById("idVotacion").value = lista_acuerdos[id]["idVotacion"];
+    CKEDITOR.instances.ckeditor2.setData(lista_acuerdos[id]["descripcion"])
     document.getElementById("enviar_acuerdo").childNodes[0].nodeValue = "Modificar acuerdo";
-    //document.getElementById()
-    console.log(id);
+    ind_ls = id;
+    console.log("id",id);
+    mod_ls = false;
 }
+/**
+ * @function leer_acta_ls Funcion para cambiar el nombre dentro del modal según sea que se va a insertar o modificar
+ * @param {}
+ */
 function change_name(){
+    mod_ls = true;
     document.getElementById("enviar_acuerdo").childNodes[0].nodeValue = "Agregar acuerdo";
 }
-
+/**
+ * @function leer_acta_ls funcion para leer el acta almacenada en el local storage
+ * @param {}
+ */
 function leer_acta_ls(){
     var json_leido = JSON.parse(localStorage.getItem('acta'));
     if(json_leido != null){
-        /*console.log(json_leido["Descripcion"])
         document.getElementById("desc_actas").value = json_leido["Descripcion"];
         CKEDITOR.instances.ckeditor1.setData(json_leido["Considerandos"]);
-        document.getElementById("idVotacion").value = json_leido["Acuerdos"][ind_ls]["idVotacion"];
-        CKEDITOR.instances.ckeditor2.setData(json_leido["Acuerdos"][ind_ls]["descripcion"]);
-        document.getElementById("guardar_acuerdo").style.visibility = "visible";
-        lista_acuerdos = json_leido["Acuerdos"];
-        console.log(lista_acuerdos);*/
-        console.log("lenght acuerdos",json_leido["Acuerdos"].length)
-        //console.log("en la lista",)
         lista_acuerdos = json_leido["Acuerdos"];
         for(var acuerdo in json_leido["Acuerdos"]){
             var tabla_acuerdos = document.getElementById("lista_acuerdos");
@@ -155,10 +165,12 @@ function leer_acta_ls(){
             tr_desc.setAttribute("class","d-flex");
             var td_desc  = document.createElement("td");
             td_desc.setAttribute("class","col-lg-11");
+            td_desc.setAttribute("id",acuerdo.toString(10));
             var td_but  = document.createElement("td");
             td_but.setAttribute("class","col-lg-1");
             var btn_modificar = document.createElement("button");
             var id_btn =  acuerdo.toString(10);
+            console.log(id_btn);
             btn_modificar.setAttribute("id", id_btn);
             btn_modificar.setAttribute("onClick","btn_editar_acuerdo(this.getAttribute('id'))");
             btn_modificar.setAttribute("data-toggle","modal");
@@ -171,14 +183,11 @@ function leer_acta_ls(){
             tr_desc.appendChild(td_desc);
             tr_desc.appendChild(td_but);
             tabla_acuerdos.appendChild(tr_desc);
-            //var td_desc = document.getElementById("lista_acuerdos");
         }
         ls = true;
+        mod_ls = true;
     }
-
-    
-    
-    //localStorage.clear();
+    localStorage.clear();
     console.log(json_leido);
 }
 
