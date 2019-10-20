@@ -5,12 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type = "text/javascript" src="ckeditor/ckeditor.js"></script>
     <script src="main.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <table id = "tableContent">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3></h3>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-lg-2">
+                Descripción
+            </div>
+            <div class="col-lg-5">
+                <input type="text" class="form-control" id="desc_actas">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">
+                Considerandos
+            </div>
+            <div class="col-lg-6">
+                <textarea id = "ckeditor1" class="ckeditor" ></textarea>
+            </div>
+        </div>
+        <div class="row" id = "row_acuerdos">
+            <div class="col-lg-2">
+
+            </div>
+            <div class="col-lg-6" id = "tabla_ac">
+                <table class="table table-bordered"  id = "lista_acuerdos" >
+                    <thead>
+                        <th>Acuerdos</th>
+                    </thead>
+                    <tbody id="table_acuerdos_body">
+                    </tbody>
+                </table> 
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"  id = "btn_agregar_acuerdo" onclick="change_name()">
+                    Agregar acuerdo
+                </button>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-lg-2">
+                    
+                </div>
+                <div class="col-lg-2">
+                    <button id="enviar_acta" class="btn btn-primary btn-block" onclick="agregar_acta()">Enviar acta</button>
+                </div>
+                <div class="col-lg-2">
+                    <button id="almacenar_local_storage" class="btn btn-primary btn-block" onclick="guardar_acta_ls()">Salvar acta</button>
+                </div>
+                <div class="col-lg-2">
+                    <button id="traer_local_storage" class="btn btn-primary btn-block" onclick="leer_acta_ls()">Restaurar acta</button>
+                </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+   
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header" >
+              <h4 class="modal-title">Acuerdos</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+                    <div class="row">
+                            <div class="col-lg-3">
+                                    Id de votación
+                            </div>
+                            <div class="col-lg-2">
+                                    <input type="text" class="form-control" id="idVotacion">
+                            </div>
+                            
+                    </div>
+                    <div class="row" id = "editor_modal">
+                            <div class="col-lg-3">
+                                    Descripción
+                            </div>
+                            <div class="col-lg-8">
+                                    <textarea id = "ckeditor2" name = "ckeditor2" class="ckeditor" ></textarea>
+                            </div>
+                            
+                    </div>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="enviar_acuerdo" class="btn btn-primary" data-dismiss="modal" onclick="agregar_acuerdo()">Agregar acuerdo</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <!--<table id = "tableContent">
         <tr>
             <td>
                 Descripción
@@ -30,6 +131,9 @@
         <tr>
             <td colspan="2">
                 <h3>Acuerdos</h3>
+            </td>
+            <td colspan="2">
+                <button id="guardar_acuerdo" onclick="agregar_acuerdo()">Guardar y siguiente</button>
             </td>
         </tr>
         <tr>
@@ -60,6 +164,6 @@
     <div>
         <button id="almacenar_local_storage" onclick="guardar_acta_ls()">Guardar local storage</button>
         <button id="traer_local_storage" onclick="leer_acta_ls()">Leer local storage</button>
-    </div>
+    </div> -->
 </body>
 </html>
