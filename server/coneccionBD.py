@@ -22,6 +22,7 @@ def getActa(idActa):
             listaActas.append(acta)
         # Cerramos la conexión
         response = {"data":listaActas}
+        cur.close()
         conexion.close()
         return response
     except:
@@ -42,6 +43,7 @@ def getVotacion(id):
             votacion = datos
         # Cerramos la conexión
         response = {"data":votacion}
+        cur.close()
         conexion.close()
         return response
     except:
@@ -60,6 +62,7 @@ def insertActa(acta):
         sql = "INSERT INTO actas (datos) VALUES ('"+insertionValue+"')"   
         print("Se intenta insertar --> ",sql)
         cur.execute(sql)
+        cur.close()
         conexion.close()
         return 'ok'
     except:
