@@ -71,6 +71,19 @@ function agregar_acta(){
         alert_bueno.appendChild(txt);
         document.getElementById("container_principal").appendChild(alert_bueno);
         //document.body.appendChild(alert_bueno);
+    }else{
+        var alert_bueno = document.createElement("div");
+        alert_bueno.setAttribute("class","alert alert-dismissible alert-danger");
+        alert_bueno.setAttribute("id","id_alert");
+        var txt = document.createTextNode("No fue posible insertar el acta");
+        var btn_close = document.createElement("button");
+        btn_close.setAttribute("class","close");
+        btn_close.setAttribute("data-dismiss","alert");
+        var txt_bt = document.createTextNode("X");
+        btn_close.appendChild(txt_bt);
+        alert_bueno.appendChild(btn_close);
+        alert_bueno.appendChild(txt);
+        document.getElementById("container_principal").appendChild(alert_bueno);
     }
     //ajax.guardar_acta_bd(jsonToSend);
     limpiar_todo();

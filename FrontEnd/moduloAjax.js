@@ -16,6 +16,9 @@ class class_ajax
                 //console.log("Response2",req.responseText);
                 
             }
+            else{
+                resp = "error"
+            }
         }
         console.log(json);
         req.open("POST"," http://127.0.0.1:5000/insertarActa",false);
