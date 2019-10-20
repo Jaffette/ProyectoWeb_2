@@ -6,7 +6,6 @@ def establecerConexion():
     conexion = psycopg2.connect("dbname=web2 user=postgres password=1234")
     return conexion
 
-
 def getActa(idActa):
     try:
         conexion = establecerConexion()
