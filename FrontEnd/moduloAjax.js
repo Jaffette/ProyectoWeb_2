@@ -5,21 +5,23 @@ class class_ajax
     }
 
     guardar_acta_bd(json){
+        var resp = null;
         var req=new XMLHttpRequest;
         req.onreadystatechange= function ()
         {
             console.log(req.status,req.readyState);
             if (req.status==200 && req.readyState==4)
             {
-                console.log("Response2",req.responseText);
+                resp = req.responseText;
+                //console.log("Response2",req.responseText);
                 
             }
         }
         console.log(json);
-        req.open("POST"," http://127.0.0.1:5000/insertarActa",true);
+        req.open("POST"," http://127.0.0.1:5000/insertarActa",false);
         req.setRequestHeader("Content-type", "application/json");
         req.send(JSON.stringify(json));
-        
+        return resp;
     }
     visual(id){
         var info=null;

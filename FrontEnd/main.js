@@ -61,8 +61,22 @@ function limpiar_textos_acuerdo(){
 function agregar_acta(){
     get_acta_info();
     //guardar_acta_bd(jsonToSend);
-    ajax.guardar_acta_bd(jsonToSend);
-    
+    var resp_ins = ajax.guardar_acta_bd(jsonToSend);
+    if(resp_ins == "ok"){
+        var alert_bueno = document.createElement("div");
+        alert_bueno.setAttribute("class","alert alert-dismissible alert-success");
+        alert_bueno.setAttribute("id","id_alert");
+        var txt = document.createTextNode("Se insertó el acta con éxito");
+        var btn_close = document.createElement("button");
+        btn_close.setAttribute("class","close");
+        btn_close.setAttribute("data-dismiss","alert");
+        var txt_bt = document.createTextNode("X");
+        btn_close.appendChild(txt_bt);
+        alert_bueno.appendChild(btn_close);
+        alert_bueno.appendChild(txt);
+        document.getElementById("container_principal").appendChild(alert_bueno);
+        //document.body.appendChild(alert_bueno);
+    }
     ls = false;
     limpiar_textos_acta();
 }
