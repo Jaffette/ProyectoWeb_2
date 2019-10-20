@@ -19,10 +19,6 @@ function agregar_acuerdo()
             "descripcion": txt_acuerdo_plain,
             "idVotacion": id_votacion
         }
-        if(mod_ls){
-            console.log("Entré a mod_ls");
-            
-        }
         if(!ls){
             lista_acuerdos.push(json);
             var tab_lista_acuerdos = document.getElementById("table_acuerdos_body");
@@ -65,6 +61,7 @@ function limpiar_textos_acuerdo(){
 function agregar_acta(){
     get_acta_info();
     guardar_acta_bd(jsonToSend);
+    ls = false;
     limpiar_textos_acta();
 }
 
@@ -140,8 +137,11 @@ function leer_acta_ls(){
         for(var acuerdo in json_leido["Acuerdos"]){
             var tabla_acuerdos = document.getElementById("lista_acuerdos");
             var tr_desc = document.createElement("tr");
+            tr_desc.setAttribute("class","d-flex");
             var td_desc  = document.createElement("td");
+            td_desc.setAttribute("class","col-lg-11");
             var td_but  = document.createElement("td");
+            td_but.setAttribute("class","col-lg-1");
             var btn_modificar = document.createElement("button");
             var id_btn =  acuerdo.toString(10);
             btn_modificar.setAttribute("id", id_btn);
