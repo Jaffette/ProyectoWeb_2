@@ -62,6 +62,7 @@ function agregar_acta(){
     get_acta_info();
     //guardar_acta_bd(jsonToSend);
     ajax.guardar_acta_bd(jsonToSend);
+    
     ls = false;
     limpiar_textos_acta();
 }
@@ -172,18 +173,11 @@ function limpiar(){
     document.getElementById("allActas").style.display='none';
 }
     
-  
 function visual(){
     var id= document.getElementById('idinput').value;
-    var req=new XMLHttpRequest;
     if(id>0){
-        
-        req.onreadystatechange= function ()
-        {
-            console.log(req.status,req.readyState);
-            if (req.status==200 && req.readyState==4)
-            {
-                var json = eval("("+req.responseText+")"); 
+        var req = ajax.visual(id);
+        var json = eval("("+req+")"); 
                 for (var body in json) {
                     var info = json[body][0].info;
                     var acuerdos = ""
@@ -203,15 +197,5 @@ function visual(){
                 document.getElementById("tableV").style.display='block';
                 document.getElementById("allActas").style.display='block';
                 document.getElementById('tableV').className='cltable2';
-            }
-        }
-        req.open("GET"," http://127.0.0.1:5000/obtenerActa/"+id,true);
-        req.send();
-       
-        
     }
-    
-        
-    
-    
-  }
+}   

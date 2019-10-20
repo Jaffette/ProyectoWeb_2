@@ -1,43 +1,18 @@
-table, th, td, caption {
-    border: 1px solid black;
-}
-.cltable{
+#tableV{
     display: none;
-    padding-left:40%;
+    padding-left:10%;
+    padding-right:10%;
 }
-.cltable2{
-    padding-left:30%;
-}
-input[type=number] {
-    width: 100px;
-    box-sizing: border-box;
-}
-.encabezado{
+
+#encabezado{
     font-weight: bold;
     padding-top: 80px;
+    padding-left: 40%;
+    padding-right: 40%;
     padding-bottom: 20px;
     text-align: center;
 }
 #allActas{
-    display: none;
-    font-weight: bold;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: center;
+    display: none; 
 }
-caption{
- font-weight: bold;   
-}
-@media (max-width: 900px) and (min-width:660px) {
-    
-    .cltable{
-        padding-left:10%;
-    }
-    
-}
-@media (max-width: 660px) {
-    
-    .cltable{
-        padding-left:1%;
-    }
-}
+
