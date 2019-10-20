@@ -34,3 +34,15 @@
 #div_desc_actas{
     padding-bottom:2%;
 }
+#container_principal{
+    padding-bottom: 2%;
+}
+ #enviar_acta{
+     padding:5%;
+ }
+ #almacenar_local_storage{
+    padding:5%;
+ }
+ #traer_local_storage{
+    padding:5%;
+ }

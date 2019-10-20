@@ -15,10 +15,12 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id ="container_principal">
         <div class="row">
             <div class="col-lg-8">
-                <h3></h3>
+                <h3>
+                    Sistema de Actas
+                </h3>
             </div>
         </div>
         <div class="row ">
@@ -41,7 +43,7 @@
             <div class="col-lg-2">
 
             </div>
-            <div class="col-lg-6" id = "tabla_ac">
+            <div class="col-lg-6 col-sm-12" id = "tabla_ac">
                 <table class="table table-bordered"  id = "lista_acuerdos" >
                     <thead>
                         <th>Acuerdos</th>
@@ -58,14 +60,14 @@
                 <div class="col-lg-2">
                     
                 </div>
-                <div class="col-lg-2">
-                    <button id="enviar_acta" class="btn btn-primary btn-block" onclick="agregar_acta()">Enviar acta</button>
+                <div class="col col-lg-2">
+                    <button id="traer_local_storage" class="btn btn-primary btn-block" onclick="leer_acta_ls()">Restaurar acta</button>
                 </div>
-                <div class="col-lg-2">
+                <div class="col col-lg-2">
                     <button id="almacenar_local_storage" class="btn btn-primary btn-block" onclick="guardar_acta_ls()">Salvar acta</button>
                 </div>
-                <div class="col-lg-2">
-                    <button id="traer_local_storage" class="btn btn-primary btn-block" onclick="leer_acta_ls()">Restaurar acta</button>
+                <div class="col col-lg-2">
+                    <button id="enviar_acta" class="btn btn-primary btn-block" onclick="agregar_acta()">Enviar acta</button>
                 </div>
         </div>
     </div>
