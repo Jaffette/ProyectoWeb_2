@@ -217,18 +217,18 @@ function visual(){
                 for (var body in json) {
                     var info = json[body][0].info;
                     var acuerdos = ""
-                    for(var i in info.acuerdos){
-                        console.log(i);
+                    for(var i in info.Acuerdos){
+                        console.log("acuerdos"+info.Acuerdos);
                         if(i==0){
-                            acuerdos = acuerdos+info.acuerdos[i].descripcion;
+                            acuerdos = acuerdos+info.Acuerdos[i].descripcion;
                         }else{
-                            acuerdos = acuerdos+", "+info.acuerdos[i].descripcion;
+                            acuerdos = acuerdos+", "+info.Acuerdos[i].descripcion;
                         }
                     }
                     document.getElementById('c1').innerHTML = json[body][0].id;
                     document.getElementById('c2').innerHTML = info.Descripcion;
                     document.getElementById('c3').innerHTML = acuerdos;
-                    document.getElementById('c4').innerHTML = info.considerandos;
+                    document.getElementById('c4').innerHTML = info.Considerandos;
                 }
                 document.getElementById("tableV").style.display='block';
                 document.getElementById("allActas").style.display='block';
