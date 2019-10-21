@@ -1,49 +1,51 @@
-#tableContent{
+#container_acuerdo{
     border: solid salmon 2px;
-}
-
-table, th, td, caption {
-    border: 1px solid black;
-}
-.cltable{
-    display: none;
-    padding-left:40%;
-}
-.cltable2{
-    padding-left:30%;
-}
-input[type=number] {
-    width: 100px;
-    box-sizing: border-box;
-}
-.encabezado{
+}    
+#guardar_acuerdo{
+    visibility: visible;
+    color: black;
     font-weight: bold;
-    padding-top: 80px;
-    padding-bottom: 20px;
-    text-align: center;
 }
-#allActas{
-    display: none;
-    font-weight: bold;
-    padding-right: 50%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: center;
+#editor_modal{
+    padding-top: 3%;
 }
-caption{
- font-weight: bold;   
-}
-@media (max-width: 900px) and (min-width:660px) {
+#myModal{
     
-    .cltable{
-        padding-left:10%;
-    }
-    
+    position: fixed;
 }
-@media (max-width: 660px) {
-    
-    .cltable{
-        padding-left:1%;
-    }
-    
+#row_acuerdos{
+    padding-top: 2%;
 }
+#tabla_ac{
+    padding-bottom:2% ;
+}
+#btn_agregar_acuerdo{
+    display: block;
+    margin: auto;
+}
+.img_edit{
+    background:url("./images/edit.svg") no-repeat ;
+    border: none;
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}
+#div_desc_actas{
+    padding-bottom:2%;
+}
+#cont_btns{
+    padding-bottom:2%;
+}
+#container_principal{
+    padding-bottom: 2%;
+}
+ #enviar_acta{
+     padding:5%;
+ }
+ #almacenar_local_storage{
+    padding:5%;
+ }
+ #traer_local_storage{
+    padding:5%;
+ }

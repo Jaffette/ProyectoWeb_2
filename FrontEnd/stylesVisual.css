@@ -1,0 +1,18 @@
+#tableV{
+    display: none;
+    padding-left:10%;
+    padding-right:10%;
+}
+
+#encabezado{
+    font-weight: bold;
+    padding-top: 80px;
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-bottom: 20px;
+    text-align: center;
+}
+#allActas{
+    display: none; 
+}
+
